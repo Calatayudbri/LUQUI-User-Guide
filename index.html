@@ -573,12 +573,49 @@
             </div>
             
             <div class="api-class">
-                <div class="class-header collapsible" onclick="toggleCollapsible(this)">Crear una flycam <span class="toggle-icon">+</span> </div>
+                <div class="class-header collapsible" onclick="toggleCollapsible(this)">Cargar y compilar shaders <span class="toggle-icon">+</span> </div>
                 <div class="content">
                     <pre><code>    
-    
-    
-                        
+// Inicialización de los shaders
+  Shader vertex = Shader();
+  if (!vertex.loadFromFile(Shader::ShaderType::kShaderType_Vertex, "../data/Shaders/vertex.vs")) {
+    std::cerr << "Error al cargar el vertex shader desde archivo." << std::endl;
+    return -2;
+  }
+  if (!vertex.compile()) {
+    std::cerr << "Error al compilar el vertex shader." << std::endl;
+    return -3;
+  }
+  
+  Shader fragment = Shader();
+  if (!fragment.loadFromFile(Shader::ShaderType::kShaderType_Fragment, "../data/Shaders/fragment.fs")) {
+    std::cerr << "Error al cargar el fragment shader desde archivo." << std::endl;
+    return -4;
+  }
+  if (!fragment.compile()) {
+    std::cerr << "Error al compilar el fragment shader." << std::endl;
+    return -5;
+  }
+
+// Crear el Programa
+  Program program = Program();
+  program.attach(&vertex);
+  program.attach(&fragment);
+  if (!program.link()) {
+    std::cout << "Error al linkar el programa" << std::endl;
+    return -4;
+  }
+
+// Usar el Programa
+  program.use();
+
+// Asignar valores al shader
+  program.setInt("LightType", static_cast<int>(lightOpt.value()->type));
+  program.setFloat("spotlightIntensity", lightOpt.value()->intensity);
+  program.setVec3("spotlightColor", lightOpt.value()->color);
+  
+// Dejar de utilizar el Programa
+  program.unuse();           
     </code></pre>
                 </div>
             </div>
@@ -587,21 +624,94 @@
                 <div class="class-header collapsible" onclick="toggleCollapsible(this)">Crear una flycam <span class="toggle-icon">+</span> </div>
                 <div class="content">
                     <pre><code>    
-    
-    
-                        
+// Crear entidad Cámara
+  Entity CameraEntity = ecsmanager.createEntity();
+  ecsmanager.addComponent<NameComponent>(CameraEntity);
+  ecsmanager.editComponent<NameComponent>(CameraEntity, [](NameComponent& cameraName) {
+    cameraName.name = "Camera";
+    });
+  ecsmanager.addComponent<CameraComponent>(CameraEntity);
+  ecsmanager.editComponent<CameraComponent>(CameraEntity, [](CameraComponent& camera) {
+    camera.position = glm::vec3(0.0f, 300.0f, 300.0f); // Nueva posición
+    camera.updateViewMatrix(); // Actualizar la matriz de vista
+    });
+
+  ecsmanager.addComponent<InputComponent>(CameraEntity);
+  ecsmanager.editComponent<InputComponent>(CameraEntity, [](InputComponent& input) {
+    input.active = true;
+    input.followingMouse = true;
+    });
+
+  ecsmanager.addComponent<TransformComponent>(CameraEntity);
+  ecsmanager.editComponent<TransformComponent>(CameraEntity, [](TransformComponent& tr) {
+    tr.position = { -200.0f, 130.0f, 40.0f };
+    });
+
+
+// Ciclo de juego
+  auto camera = ecsmanager.getComponent<CameraComponent>(CameraEntity).value();
+  auto inputComp = ecsmanager.getComponent<InputComponent>(CameraEntity);
+  if (camera) {
+    if (inputComp)
+      inputSystem.update(inputComp.value(), cameraComponent.value(), input, 0.016f);
+    // Usa las matrices de la cámara del componente
+    camera.value()->updateViewMatrix();
+    camera.value()->updateProjectionMatrix();
+    view = camera.value()->view;
+    projection = camera.value()->projection;
+  }
+
+    // Pasar las matrices de vista y proyección al shader
+    GLuint viewLoc = glGetUniformLocation(program.get_id(), "view");
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+    GLuint projectionLoc = glGetUniformLocation(program.get_id(), "projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
     </code></pre>
                 </div>
             </div>
 
 
             <div class="api-class">
-                <div class="class-header collapsible" onclick="toggleCollapsible(this)">Crear una flycam <span class="toggle-icon">+</span> </div>
+                <div class="class-header collapsible" onclick="toggleCollapsible(this)">Crear una entidad de luz direccional <span class="toggle-icon">+</span> </div>
                 <div class="content">
                     <pre><code>    
-    
-    
-                        
+    // Crear una entidad para la luz
+  Entity lightEntity = ecsmanager.createEntity();
+
+  ecsmanager.addComponent<NameComponent>(lightEntity);
+  ecsmanager.editComponent<NameComponent>(lightEntity, [](NameComponent& cameraName) {
+    cameraName.name = "Directional Light";
+    });
+  ecsmanager.addComponent<LightComponent>(lightEntity);
+  ecsmanager.editComponent<LightComponent>(lightEntity, [](LightComponent& light) {
+    light.type = LightType::Directional; // Tipo de luz (Point Light)
+    light.color = glm::vec3(1.0f, 1.0f, 1.0f); // Color de la luz (RGB)
+    light.position = glm::vec3(20.0f, 100.0f, 0.0f); // Posición de la luz
+    light.direction = glm::vec3(1.0f, 1.0f, -0.5f);
+    light.intensity = 2.0f; // Intensidad de la luz
+    light.radius = 250.0f; // Radio de influencia de la luz
+    });
+
+// Ciclo de juego
+
+for (Entity Light_entity = 1; Light_entity < ecsmanager.get_nextEntity(); ++Light_entity) {
+  // Configurar la luz en el shader
+  if (!ecsmanager.isEntityAlive(Light_entity)) continue;
+  auto lightOpt = ecsmanager.getComponent<LightComponent>(Light_entity);
+  if (!lightOpt.has_value()) continue;
+
+  if (lightOpt && lightOpt.value()->type == LightType::Directional) {
+    program.setVec3("directionalLightColor", lightOpt.value()->color);
+    program.setVec3("directionalLightDirection", lightOpt.value()->direction);
+    program.setFloat("directionalLightIntensity", lightOpt.value()->intensity);
+    program.setInt("LightType", static_cast<int>(lightOpt.value()->type));
+  }
+  for (Entity entity = 1; entity < ecsmanager.get_nextEntity(); ++entity) {
+    if (!ecsmanager.isEntityAlive(entity)) continue;
+    renderSystem.drawModel(transformOpt.value(), modelOpt.value(), program);
+  }
+}               
     </code></pre>
                 </div>
             </div>
