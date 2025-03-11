@@ -3,62 +3,2093 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUQUI Engine - Guía de Uso</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>3PVG Motor Gráfico - Documentación</title>
+    <style>
+	:root {
+ 	--primary-color: #053012;
+    	--primary-dark: #021a0a;
+    	--primary-light: #0a4b1e;
+    	--secondary-color: #16a34a;
+    	--accent-color: #3ca370;
+    	--text-color: #333;
+    	--light-text: #f8f9fa;
+    	--light-bg: #f2f7f4;
+    	--code-bg: #e8f0eb;
+    	--border-color: #c5d8c7;
+    	--hover-color: #0c602a;
+	}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    	.header-image {
+        	max-width: 100px;  /* Ajusta el tamaño según prefieras */
+       		height: auto;
+        	margin: 1rem 0;
+        	display: block;
+        	margin-left: auto;
+        	margin-right: auto;
+    	}
+
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        p, ul, ol {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            padding-left: 2rem;
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .nav {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .nav a {
+            color: white;
+            margin: 0 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+        .nav-image {
+        	max-width: 50px;  /* Ajusta el tamaño según prefieras */
+       		height: 50px;
+        	margin: 1rem 0;
+        	display: flex;
+        	margin-left: auto;
+        	margin-right: auto;
+    	}
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-title {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Estilos para elementos desplegables */
+        .collapsible {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .toggle-icon {
+            font-family: monospace;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 1.2em;
+            color: var(--accent-color);
+            transition: transform 0.3s;
+        }
+
+        .active .toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .collapsed-content {
+            display: none;
+            padding: 0.5rem 0;
+            overflow: hidden;
+        }
+
+        .api-class {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .class-header {
+            color: var(--accent-color);
+            margin-top: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .class-header h3 {
+            margin: 0;
+            color: var(--accent-color);
+        }
+        
+        .api-class h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .method-header {
+            margin-top: 1rem;
+            margin-bottom: 0.2rem;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .method-header h5 {
+            margin: 0;
+        }
+        
+        .method {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid #eee;
+        }
+        
+        .method-signature {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: var(--code-bg);
+            padding: 0.3rem 0.5rem;
+            border-radius: 3px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .attribute {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid #eee;
+        }
+        
+        .attribute-signature {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: var(--code-bg);
+            padding: 0.3rem 0.5rem;
+            border-radius: 3px;
+            margin-bottom: 0.2rem;
+        }
+        
+        .enum-header {
+            margin-top: 1rem;
+            margin-bottom: 0.2rem;
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .enum-header h5 {
+            margin: 0;
+        }
+        
+        .enum {
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid #eee;
+        }
+        
+        .enum-values {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: var(--code-bg);
+            padding: 0.3rem 0.5rem;
+            border-radius: 3px;
+            margin-top: 0.2rem;
+        }
+        
+        .example {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .example h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .example pre {
+            margin-bottom: 0;
+        }
+        
+        /* Links de navegación para móviles */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            .nav a {
+                margin: 0.2rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <header class="bg-green-600 text-white text-center py-4 text-xl font-bold flex items-center justify-center">
-        <img src="LUQUI.png" alt="LUQUI Engine Logo" class="h-20 mr-4"> 
-        LUQUI Engine - Guía de Uso
+<body>
+    <header>
+        <div class="container">
+	    
+            <h1>3PVG Motor Gráfico</h1>
+	    <img src="./LUQUI.png" alt="Motor Gráfico 3PVG Logo" class="header-image">
+            <p>Documentación del Motor Gráfico de Videojuegos</p>
+        </div>
     </header>
     
-    <nav class="bg-green-500 text-white py-2">
-        <ul class="flex justify-center space-x-6">
-            <li><a href="#inicio" class="hover:underline">Inicio</a></li>
-            <li><a href="#instalacion" class="hover:underline">Instalación</a></li>
-            <li><a href="#deps" class="hover:underline">DEPENDENCIAS</a></li>
-            <li><a href="#ejemplos" class="hover:underline">Ejemplos</a></li>
-        </ul>
+    <nav class="nav">
+        <div class="nav-container">
+	    <img src="./LUQUI.png" alt="Motor Gráfico 3PVG Logo" class="nav-image">
+            <a href="#descripcion">Descripción</a>
+            <a href="#instalacion">Instalación</a>
+            <a href="#caracteristicas">Características</a>
+            <a href="#api">API</a>
+            <a href="#guia-uso">Guía de Uso</a>
+            <a href="#inicio-rapido">Inicio Rápido</a>
+        </div>
     </nav>
     
-    <section id="inicio" class="p-6">
-        <h2 class="text-2xl font-bold text-gray-800">Bienvenido a LUQUI Engine</h2>
-        <p class="mt-2 text-gray-700">LUQUI Engine es un motor gráfico basado en openGL desarrollado por Lucas Calatayud y Enrique López</p>
-    </section>
-    
-    <section id="deps" class="p-6 bg-white shadow-md rounded-md m-4">
-        <h2 class="text-2xl font-bold text-gray-800">DEPENDENCIAS</h2>
-        <ol class="list-decimal list-inside mt-2 text-gray-700">
-            <li>Visual Studio 2022.</li>
-            <li>Conan</li>
-            <li>Python 3.12</li>
-            <li>CMake.</li>
-        </ol>
-    </section>
-    
-    <section id="instalacion" class="p-6 bg-white shadow-md rounded-md m-4">
-        <h2 class="text-2xl font-bold text-gray-800">Guía de Instalación</h2>
-        <p class="mt-2 text-gray-700">Para instalar LUQUI Engine, sigue los siguientes pasos:</p>
-        <ol class="list-decimal list-inside mt-2 text-gray-700">
-            <li>Descarga el archivo zip del motor.</li>
-            <li>Abrir consola developer command prompt de Visual Studio.</li>
-            <li>Navegar hasta la ruta del repositorio.</li>
-            <li>En la carpeta raíz utilizar los siguientes comandos: <br><code class="bg-gray-200 p-1 rounded">4.1. ./tools/gendeps.bat</br><br>4.2. ./tools/premake/premake5.exe vs2022</br> <br>4.3. ./build/LUQUI.sln</br></code></li>
-        </ol>
-    </section>
-    
-    
-    <section id="ejemplos" class="p-6 bg-white shadow-md rounded-md m-4">
-        <h2 class="text-2xl font-bold text-gray-800">Ejemplo de Código</h2>
-        <p class="mt-2 text-gray-700">Aquí tienes un pequeño ejemplo para dibujar un sprite en pantalla:</p>
-        <pre class="bg-gray-200 p-4 rounded mt-2"><code>
+    <div class="container">
+        <section id="descripcion">
+            <h2>Descripción</h2>
+            <p>El Motor Gráfico 3PVG es un framework moderno y flexible diseñado para el desarrollo de videojuegos. Implementa una arquitectura basada en componentes (ECS - Entity Component System) que permite crear aplicaciones interactivas de alto rendimiento.</p>
+            
+            <p>Desarrollado como parte del proyecto académico 3PVG_PMG_24, este motor gráfico proporciona las herramientas necesarias para la creación de gráficos 3D, gestión de entrada, física básica, y más funcionalidades esenciales para el desarrollo de juegos.</p>
+            
+            <p>El motor está construido sobre OpenGL para el renderizado gráfico, GLFW para la gestión de ventanas e input, y varias bibliotecas auxiliares que facilitan tareas comunes en el desarrollo de videojuegos.</p>
+        </section>
+        
+        <section id="instalacion">
+            <h2>Guía de Instalación</h2>
+            
+            <h3>Dependencias Necesarias</h3>
+            <p>Para poder compilar y ejecutar el motor, necesitarás tener instaladas las siguientes herramientas:</p>
+            <ul>
+                <li><strong>Visual Studio 2022</strong> - Entorno de desarrollo integrado</li>
+                <li><strong>Conan</strong> - Gestor de paquetes para C/C++</li>
+                <li><strong>Python 3.12</strong> - Necesario para algunas herramientas de compilación</li>
+                <li><strong>CMake</strong> - Sistema de generación de archivos de compilación</li>
+            </ul>
+            
+            <h3>Proceso de Compilación</h3>
+            <ol>
+                <li>Descarga el código fuente del motor desde el repositorio (archivo ZIP)</li>
+                <li>Abre la consola "Developer Command Prompt" de Visual Studio</li>
+                <li>Navega hasta la ruta del repositorio descargado</li>
+                <li>Ejecuta los siguientes comandos en secuencia:
+                    <pre><code>./tools/gendeps.bat
+./tools/premake/premake5.exe vs2022
+./build/Motor.sln</code></pre>
+                </li>
+                <li>La solución se abrirá en Visual Studio 2022 donde podrás compilar y ejecutar el motor</li>
+            </ol>
+            
+            <h3>Verificación de la Instalación</h3>
+            <p>Para verificar que la instalación se ha realizado correctamente, puedes ejecutar la aplicación de demostración incluida en la solución. Si la ventana se abre correctamente y muestra un triángulo renderizado, la instalación ha sido exitosa.</p>
+        </section>
+        
+        <section id="caracteristicas">
+            <h2>Características Principales</h2>
+            
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-title">Sistema de Entidades y Componentes (ECS)</div>
+                    <p>Arquitectura flexible para la gestión de objetos del juego, permitiendo la composición de entidades con diferentes componentes.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Renderizado 3D</div>
+                    <p>Soporte para modelos 3D, texturas y sistemas de iluminación basados en OpenGL.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Sistema de Input</div>
+                    <p>Gestión completa de entrada de teclado, ratón y gamepad a través de GLFW.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Sistema de Jobs</div>
+                    <p>Programación de tareas multihilo para mejorar el rendimiento en sistemas multicore.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Sistema de Shaders</div>
+                    <p>Programas de shader personalizables para efectos de renderizado avanzados.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Gestión de Ventanas</div>
+                    <p>Creación y gestión sencilla de ventanas de aplicación con GLFW.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Scripting con Lua</div>
+                    <p>Integración de scripts Lua para la lógica de juego personalizada.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Sistema de Cámara</div>
+                    <p>Controles de cámara completos con varios tipos de proyección.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-title">Carga de Modelos</div>
+                    <p>Soporte para varios formatos de modelos 3D a través de Assimp.</p>
+                </div>
+            </div>
+        </section>
+        
+<div class="container">
+        <h2>API</h2>
+        
+        <h3 class="category-title">Clases Principales</h3>
+        
+        <!-- ECSManager -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>ECSManager</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Gestor del sistema de entidades y componentes. Administra la creación, actualización y destrucción de entidades y sus componentes asociados.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>createEntity</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Entity createEntity();</div>
+                        <p><b>Brief:</b> Crea una nueva entidad en el sistema.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Identificador único de la entidad creada.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>destroyEntity</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void destroyEntity(Entity entity);</div>
+                        <p><b>Brief:</b> Destruye una entidad y todos sus componentes asociados.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>entity</code> - Identificador de la entidad a destruir.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>isEntityAlive</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool isEntityAlive(Entity entity) const;</div>
+                        <p><b>Brief:</b> Comprueba si una entidad sigue activa en el sistema.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>entity</code> - Identificador de la entidad a comprobar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si la entidad está activa, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>get_nextEntity</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Entity get_nextEntity();</div>
+                        <p><b>Brief:</b> Obtiene el identificador de la próxima entidad que se creará.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Identificador de la próxima entidad.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>addComponentType</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">template&lt;typename T&gt; void addComponentType();</div>
+                        <p><b>Brief:</b> Registra un nuevo tipo de componente en el sistema.</p>
+                        <p><b>Parámetros:</b> Ninguno (tipo especificado como parámetro de template)</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>getComponent</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">template&lt;typename T&gt; std::optional&lt;T*&gt; getComponent(size_t entity);</div>
+                        <p><b>Brief:</b> Obtiene un componente de tipo T asociado a la entidad especificada.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>entity</code> - Identificador de la entidad.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Puntero opcional al componente si existe, o <code>std::nullopt</code> si no existe.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>addComponent</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">template&lt;typename T&gt; int addComponent(size_t entity);</div>
+                        <p><b>Brief:</b> Añade un componente de tipo T a la entidad especificada.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>entity</code> - Identificador de la entidad.</li>
+                        </ul>
+                        <p><b>Retorno:</b> 0 si se añade correctamente, -1 en caso de error.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>editComponent</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">template&lt;typename T&gt; bool editComponent(size_t entity, const std::function&lt;void(T&)&gt;& editor);</div>
+                        <p><b>Brief:</b> Edita un componente de tipo T asociado a la entidad usando la función proporcionada.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>entity</code> - Identificador de la entidad.</li>
+                            <li><code>editor</code> - Función que recibe una referencia al componente y lo modifica.</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si se edita correctamente, <code>false</code> en caso de error.</p>
+                    </div>
+                </div>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">const Entity INVALID_Entity = 0;</div>
+                    <p>Constante que representa un identificador de entidad inválido.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Window -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>Window</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Gestión de ventanas de la aplicación. Proporciona funcionalidades para crear, manipular y renderizar en ventanas OpenGL.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Window (Constructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Window(GLFWwindow* glfwWindow);</div>
+                        <p><b>Brief:</b> Construye un objeto Window a partir de una ventana GLFW existente.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>glfwWindow</code> - Puntero a una ventana GLFW.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>~Window (Destructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">~Window();</div>
+                        <p><b>Brief:</b> Destruye la ventana y libera sus recursos.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>make</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">static std::optional&lt;Window&gt; make(int window_width, int window_height, const char* window_name);</div>
+                        <p><b>Brief:</b> Método fábrica que crea una nueva ventana.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>window_width</code> - Ancho de la ventana en píxeles.</li>
+                            <li><code>window_height</code> - Alto de la ventana en píxeles.</li>
+                            <li><code>window_name</code> - Título de la ventana.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Un opcional que contiene la ventana creada, o <code>std::nullopt</code> si falla la creación.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>setCurrentWindowActive</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void setCurrentWindowActive();</div>
+                        <p><b>Brief:</b> Establece esta ventana como el contexto de renderizado activo.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>render</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void render();</div>
+                        <p><b>Brief:</b> Intercambia los buffers y procesa los eventos de la ventana.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>clear</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void clear();</div>
+                        <p><b>Brief:</b> Limpia el framebuffer de la ventana.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>renderFigure</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void renderFigure(Figure& figure);</div>
+                        <p><b>Brief:</b> Renderiza una figura en la ventana.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>figure</code> - Referencia a la figura a renderizar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>isOpen</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool isOpen();</div>
+                        <p><b>Brief:</b> Comprueba si la ventana debería cerrarse.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> <code>true</code> si la ventana debe cerrarse, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">GLFWwindow* window;</div>
+                    <p>Puntero a la ventana GLFW subyacente.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- WindowSystem -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>WindowSystem</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Sistema de gestión de ventanas. Inicializa y finaliza el sistema GLFW.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>make</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">static std::optional&lt;WindowSystem&gt; make();</div>
+                        <p><b>Brief:</b> Método fábrica que crea un nuevo sistema de ventanas.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Un opcional que contiene el sistema de ventanas creado, o <code>std::nullopt</code> si falla la inicialización.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>~WindowSystem (Destructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">~WindowSystem();</div>
+                        <p><b>Brief:</b> Finaliza el sistema de ventanas y libera los recursos.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Input -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>Input</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Sistema de gestión de entrada de usuario. Proporciona una capa de abstracción sobre la entrada de teclado, ratón y gamepad.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Input (Constructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Input(GLFWwindow* window);</div>
+                        <p><b>Brief:</b> Construye un gestor de entrada para la ventana especificada.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>window</code> - Puntero a una ventana GLFW.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>isKeyPressed</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool isKeyPressed(int key);</div>
+                        <p><b>Brief:</b> Comprueba si una tecla está actualmente pulsada.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>key</code> - Código de la tecla a comprobar (usar las constantes de la enumeración Key).</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si la tecla está pulsada, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>isKeyReleased</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool isKeyReleased(int key);</div>
+                        <p><b>Brief:</b> Comprueba si una tecla está actualmente liberada.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>key</code> - Código de la tecla a comprobar (usar las constantes de la enumeración Key).</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si la tecla está liberada, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>isMouseButtonPressed</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool isMouseButtonPressed(int button);</div>
+                        <p><b>Brief:</b> Comprueba si un botón del ratón está pulsado.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>button</code> - Código del botón a comprobar (usar las constantes de la enumeración Mouse_Key).</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si el botón está pulsado, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>getMousePosition</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void getMousePosition(double& xPos, double& yPos);</div>
+                        <p><b>Brief:</b> Obtiene la posición actual del cursor del ratón.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>xPos</code> - Referencia donde se almacenará la coordenada X.</li>
+                            <li><code>yPos</code> - Referencia donde se almacenará la coordenada Y.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno (los valores se devuelven por referencia)</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>getMouseScroll</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">double getMouseScroll();</div>
+                        <p><b>Brief:</b> Obtiene el valor de desplazamiento del scroll del ratón.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Valor del desplazamiento del scroll.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>isJoystickConnected</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool isJoystickConnected(int joystickID);</div>
+                        <p><b>Brief:</b> Comprueba si un joystick está conectado.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>joystickID</code> - ID del joystick</li>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>mapAction</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void mapAction(Action action, int key);</div>
+                        <p><b>Brief:</b> Mapea una acción del juego a una tecla específica.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>action</code> - Acción a mapear (usar las constantes de la enumeración Action).</li>
+                            <li><code>key</code> - Código de la tecla a asociar (usar las constantes de la enumeración Key).</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>isActionPressed</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool isActionPressed(Action action);</div>
+                        <p><b>Brief:</b> Comprueba si la tecla asociada a una acción está pulsada.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>action</code> - Acción a comprobar (usar las constantes de la enumeración Action).</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si la acción está activada, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <h4>Enumeraciones</h4>
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Key</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define las constantes para las teclas del teclado.</p>
+                        <div class="enum-values">KEY_UNKNOWN = -1, KEY_A = 1, KEY_B, KEY_C, ..., KEY_SPACE, KEY_TAB, KEY_ENTER, ...</div>
+                    </div>
+                </div>
+                
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Mouse_Key</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define las constantes para los botones del ratón.</p>
+                        <div class="enum-values">MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_WHEEL</div>
+                    </div>
+                </div>
+                
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Action</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define las acciones de juego que pueden mapearse a teclas.</p>
+                        <div class="enum-values">MOVE_FORWARD, JUMP, SHOOT</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- JobSystem -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>JobSystem</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Sistema de gestión de tareas multihilo para mejorar el rendimiento en sistemas multicore.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>JobSystem (Constructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">JobSystem(unsigned int numThreads);</div>
+                        <p><b>Brief:</b> Construye un nuevo sistema de tareas con el número especificado de hilos de trabajo.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>numThreads</code> - Número de hilos de trabajo a crear.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>~JobSystem (Destructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">~JobSystem();</div>
+                        <p><b>Brief:</b> Destruye el sistema de tareas y finaliza todos los hilos de trabajo.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>addJob</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void addJob(JobType type, JobPriority priority, std::function&lt;void()&gt; f);</div>
+                        <p><b>Brief:</b> Añade una nueva tarea al sistema con el tipo y prioridad especificados.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>type</code> - Tipo de la tarea.</li>
+                            <li><code>priority</code> - Prioridad de la tarea.</li>
+                            <li><code>f</code> - Función a ejecutar como tarea.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>runTasks</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void runTasks();</div>
+                        <p><b>Brief:</b> Ejecuta las tareas pendientes según su prioridad.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <h4>Enumeraciones</h4>
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>JobType</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define los tipos de tareas para categorización.</p>
+                        <div class="enum-values">Render, Physics, AI, Audio, General</div>
+                    </div>
+                </div>
+                
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>JobPriority</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define las prioridades de las tareas.</p>
+                        <div class="enum-values">Low, Medium, High</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Program -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>Program</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Gestión de programas de shader en OpenGL. Permite combinar shaders, configurar variables uniformes y activar el programa para renderizado.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Program (Constructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Program();</div>
+                        <p><b>Brief:</b> Crea un nuevo programa de shader vacío.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>~Program (Destructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">~Program();</div>
+                        <p><b>Brief:</b> Destruye el programa de shader y libera los recursos en OpenGL.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>attach</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void attach(Shader* shader);</div>
+                        <p><b>Brief:</b> Adjunta un shader al programa.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>shader</code> - Puntero al shader a adjuntar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>link</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool link();</div>
+                        <p><b>Brief:</b> Enlaza los shaders adjuntos en un programa completo.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> <code>true</code> si el enlace es exitoso, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>use</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void use() const;</div>
+                        <p><b>Brief:</b> Activa el programa de shader para su uso en operaciones de renderizado.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>unuse</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void unuse();</div>
+                        <p><b>Brief:</b> Desactiva el programa de shader (establece el programa activo a 0).</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>createProgram</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">static bool createProgram(Program& program, Shader* vertex_shader, Shader* fragment_shader);</div>
+                        <p><b>Brief:</b> Método estático para crear un programa completo a partir de un vertex shader y un fragment shader.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>program</code> - Referencia al objeto Program donde se creará el programa.</li>
+                            <li><code>vertex_shader</code> - Puntero al vertex shader.</li>
+                            <li><code>fragment_shader</code> - Puntero al fragment shader.</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si la creación es exitosa, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>setVec3</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void setVec3(const std::string &name, const glm::vec3 &value);</div>
+                        <p><b>Brief:</b> Establece una variable uniform de tipo vec3 en el shader.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>name</code> - Nombre de la variable uniform en el shader.</li>
+                            <li><code>value</code> - Valor vec3 a asignar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>setmat4</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void setmat4(const std::string& name, glm::mat4& value);</div>
+                        <p><b>Brief:</b> Establece una variable uniform de tipo mat4 en el shader.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>name</code> - Nombre de la variable uniform en el shader.</li>
+                            <li><code>value</code> - Valor mat4 a asignar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">GLuint id;</div>
+                    <p>Identificador OpenGL del programa de shader.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Shader -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>Shader</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Gestión de shaders individuales en OpenGL.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Shader (Constructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Shader();</div>
+                        <p><b>Brief:</b> Crea un nuevo shader vacío.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>~Shader (Destructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">~Shader();</div>
+                        <p><b>Brief:</b> Destruye el shader y libera los recursos en OpenGL.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>loadSource</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool loadSource(const ShaderType shader_type, const char* source, const unsigned int source_size);</div>
+                        <p><b>Brief:</b> Carga el código fuente del shader desde una cadena.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>shader_type</code> - Tipo de shader (vertex, fragment, etc.).</li>
+                            <li><code>source</code> - Código fuente del shader.</li>
+                            <li><code>source_size</code> - Tamaño del código fuente en bytes.</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si la carga es exitosa, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>loadFromFile</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool loadFromFile(const ShaderType shader_type, const std::string& filePath);</div>
+                        <p><b>Brief:</b> Carga el código fuente del shader desde un archivo.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>shader_type</code> - Tipo de shader (vertex, fragment, etc.).</li>
+                            <li><code>filePath</code> - Ruta al archivo con el código fuente del shader.</li>
+                        </ul>
+                        <p><b>Retorno:</b> <code>true</code> si la carga es exitosa, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>compile</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool compile();</div>
+                        <p><b>Brief:</b> Compila el shader cargado.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> <code>true</code> si la compilación es exitosa, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>get_isCompiled</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool get_isCompiled() const;</div>
+                        <p><b>Brief:</b> Comprueba si el shader está compilado.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> <code>true</code> si el shader está compilado, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>get_id</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">unsigned int get_id();</div>
+                        <p><b>Brief:</b> Obtiene el ID del shader en OpenGL.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> ID del shader en OpenGL.</p>
+                    </div>
+                </div>
+                
+                <h4>Enumeraciones</h4>
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>ShaderType</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define los tipos de shader soportados.</p>
+                        <div class="enum-values">kShaderType_Invalid, kShaderType_Vertex, kShaderType_Fragment, kShaderType_Geometry</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            Ejemplo aqui
-        </code></pre>
-    </section>
-    
-    <footer class="bg-gray-800 text-white text-center py-4 mt-6">
-       LUQUI Engine.
+        <h3 class="category-title">Modelos y Mallas</h3>
+        
+        <!-- Model -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>Model</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Gestión de modelos 3D. Permite cargar, procesar y renderizar modelos 3D con soporte para texturas.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Model (Constructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Model(const std::string& path);</div>
+                        <p><b>Brief:</b> Carga un modelo 3D desde un archivo de forma síncrona.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>path</code> - Ruta al archivo del modelo.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Model (Constructor con JobSystem)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Model(const std::string& path, JobSystem& jobSystem);</div>
+                        <p><b>Brief:</b> Carga un modelo 3D de forma asíncrona usando el sistema de tareas.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>path</code> - Ruta al archivo del modelo.</li>
+                            <li><code>jobSystem</code> - Referencia al sistema de tareas para la carga asíncrona.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Draw</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void Draw(Program &program) const;</div>
+                        <p><b>Brief:</b> Renderiza el modelo usando el programa de shader especificado.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>program</code> - Referencia al programa de shader a utilizar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>finalizeModel</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void finalizeModel();</div>
+                        <p><b>Brief:</b> Finaliza la carga de un modelo asíncrono, creando los recursos OpenGL necesarios.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>isLoadComplete</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">bool isLoadComplete() const;</div>
+                        <p><b>Brief:</b> Comprueba si la carga del modelo ha finalizado completamente.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> <code>true</code> si la carga está completa, <code>false</code> en caso contrario.</p>
+                    </div>
+                </div>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">std::vector&lt;Mesh&gt; meshes;</div>
+                    <p>Lista de mallas que componen el modelo.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mesh -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>Mesh</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Gestión de mallas 3D. Representa una malla individual dentro de un modelo 3D.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Mesh (Constructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">Mesh(std::vector&lt;Vertex&gt; vertices, std::vector&lt;unsigned int&gt; indices, std::vector&lt;Texture&gt; textures);</div>
+                        <p><b>Brief:</b> Construye una malla a partir de vértices, índices y texturas.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>vertices</code> - Vector de vértices que componen la malla.</li>
+                            <li><code>indices</code> - Vector de índices que definen las caras de la malla.</li>
+                            <li><code>textures</code> - Vector de texturas asociadas a la malla.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>~Mesh (Destructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">~Mesh();</div>
+                        <p><b>Brief:</b> Destruye la malla y libera los recursos en OpenGL.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Draw</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void Draw(Program &program) const;</div>
+                        <p><b>Brief:</b> Renderiza la malla usando el programa de shader especificado.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>program</code> - Referencia al programa de shader a utilizar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <h4>Estructuras</h4>
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Vertex</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define la estructura de un vértice.</p>
+                        <div class="enum-values">
+                            glm::vec3 position;<br>
+                            glm::vec3 normal;<br>
+                            glm::vec2 texCoords;
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>Texture</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define la estructura de una textura.</p>
+                        <div class="enum-values">
+                            unsigned int id;<br>
+                            std::string type;<br>
+                            std::string path;<br>
+                            aiTextureType assimpType;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h3 class="category-title">Componentes ECS</h3>
+        
+        <!-- TransformComponent -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>TransformComponent</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Componente que define la posición, rotación y escala de una entidad en el espacio 3D.</p>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 position;</div>
+                    <p>Posición en el espacio 3D (x, y, z).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 rotation;</div>
+                    <p>Rotación en grados para cada eje (x, y, z).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 scale;</div>
+                    <p>Factor de escala para cada eje (x, y, z).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::mat4 transform_matrix;</div>
+                    <p>Matriz de transformación calculada a partir de position, rotation y scale.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RenderComponent -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>RenderComponent</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Componente para renderizar modelos 3D.</p>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">std::shared_ptr&lt;Model&gt; model;</div>
+                    <p>Puntero compartido al modelo 3D a renderizar.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ShapeComponent -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>ShapeComponent</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Componente para formas geométricas primitivas.</p>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">ShapeType type;</div>
+                    <p>Tipo de forma geométrica (cuadrado, triángulo, círculo, etc.).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">std::vector&lt;Vec3&gt; vertices;</div>
+                    <p>Vértices que componen la forma.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">Vec4 color;</div>
+                    <p>Color de la forma (RGBA).</p>
+                </div>
+                
+                <h4>Funciones Auxiliares</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>createSquare</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">ShapeComponent createSquare(float size, const Vec4& color);</div>
+                        <p><b>Brief:</b> Crea un componente de forma para un cuadrado.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>size</code> - Tamaño del cuadrado.</li>
+                            <li><code>color</code> - Color del cuadrado (RGBA).</li>
+                        </ul>
+                        <p><b>Retorno:</b> Componente de forma configurado como un cuadrado.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>createTriangle</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">ShapeComponent createTriangle(float size, const Vec4& color);</div>
+                        <p><b>Brief:</b> Crea un componente de forma para un triángulo.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>size</code> - Tamaño del triángulo.</li>
+                            <li><code>color</code> - Color del triángulo (RGBA).</li>
+                        </ul>
+                        <p><b>Retorno:</b> Componente de forma configurado como un triángulo.</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>createCircle</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">ShapeComponent createCircle(float radius, const Vec4& color, int segments = 32);</div>
+                        <p><b>Brief:</b> Crea un componente de forma para un círculo.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>radius</code> - Radio del círculo.</li>
+                            <li><code>color</code> - Color del círculo (RGBA).</li>
+                            <li><code>segments</code> - Número de segmentos para aproximar el círculo (por defecto 32).</li>
+                        </ul>
+                        <p><b>Retorno:</b> Componente de forma configurado como un círculo.</p>
+                    </div>
+                </div>
+                
+                <h4>Enumeraciones</h4>
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>ShapeType</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define los tipos de formas geométricas soportadas.</p>
+                        <div class="enum-values">Square, Triangle, Circle, Cube, Sphere</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CameraComponent -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>CameraComponent</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Componente que define una cámara para visualizar la escena 3D.</p>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 position;</div>
+                    <p>Posición de la cámara en el espacio 3D.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 front;</div>
+                    <p>Vector que indica la dirección hacia la que mira la cámara.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 up;</div>
+                    <p>Vector que indica la dirección "arriba" de la cámara.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 right;</div>
+                    <p>Vector que indica la dirección "derecha" de la cámara.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float yaw;</div>
+                    <p>Ángulo de rotación horizontal en grados (alrededor del eje Y).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float pitch;</div>
+                    <p>Ángulo de rotación vertical en grados (alrededor del eje X).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float movementSpeed;</div>
+                    <p>Velocidad de movimiento de la cámara.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float mouseSensitivity;</div>
+                    <p>Sensibilidad del ratón para el control de la cámara.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::mat4 view;</div>
+                    <p>Matriz de vista calculada a partir de la posición y orientación de la cámara.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::mat4 projection;</div>
+                    <p>Matriz de proyección calculada a partir de los parámetros de la cámara.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float fov;</div>
+                    <p>Campo de visión en grados.</p>
+                </div>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>updateCameraVectors</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void updateCameraVectors();</div>
+                        <p><b>Brief:</b> Actualiza los vectores de dirección de la cámara basándose en yaw y pitch.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>updateViewMatrix</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void updateViewMatrix();</div>
+                        <p><b>Brief:</b> Recalcula la matriz de vista basándose en la posición y orientación de la cámara.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>updateProjectionMatrix</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void updateProjectionMatrix();</div>
+                        <p><b>Brief:</b> Recalcula la matriz de proyección basándose en los parámetros de la cámara.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- LightComponent -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>LightComponent</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Componente que define una fuente de luz en la escena.</p>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">LightType type;</div>
+                    <p>Tipo de luz (direccional, puntual, focal o ambiental).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 color;</div>
+                    <p>Color de la luz.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 position;</div>
+                    <p>Posición de la luz (para luces puntuales y focales).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">glm::vec3 direction;</div>
+                    <p>Dirección de la luz (para luces direccionales y focales).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float intensity;</div>
+                    <p>Intensidad de la luz.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float radius;</div>
+                    <p>Radio de efecto de la luz (para luces puntuales y focales).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float cutoff;</div>
+                    <p>Ángulo de corte interno (para luces focales).</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">float outerCutoff;</div>
+                    <p>Ángulo de corte externo (para luces focales).</p>
+                </div>
+                
+                <h4>Enumeraciones</h4>
+                <div class="enum-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>LightType</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="enum">
+                        <p>Define los tipos de luces soportadas.</p>
+                        <div class="enum-values">Directional, Point, Spot, Ambient</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- InputComponent -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>InputComponent</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Componente para manejar la entrada de usuario para una entidad.</p>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">bool isMovingForward;</div>
+                    <p>Indica si la entidad se está moviendo hacia adelante.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">bool isJumping;</div>
+                    <p>Indica si la entidad está saltando.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">bool isShooting;</div>
+                    <p>Indica si la entidad está disparando.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">int keyReceived;</div>
+                    <p>Última tecla recibida como entrada.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">bool followingMouse;</div>
+                    <p>Indica si la entidad debe seguir el movimiento del ratón.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">double mouseX;</div>
+                    <p>Posición X actual del ratón.</p>
+                </div>
+                
+                <div class="attribute">
+                    <div class="attribute-signature">double mouseY;</div>
+                    <p>Posición Y actual del ratón.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ScriptComponent -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>ScriptComponent</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Componente para adjuntar scripts Lua a entidades.</p>
+                
+                <h4>Atributos</h4>
+                <div class="attribute">
+                    <div class="attribute-signature">std::shared_ptr&lt;LuaScript&gt; script;</div>
+                    <p>Puntero compartido al script Lua.</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3 class="category-title">Sistemas</h3>
+        
+        <!-- RenderSystem -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>RenderSystem</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Sistema encargado de renderizar entidades con componentes de transformación y renderizado.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>RenderSystem (Constructor)</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">RenderSystem();</div>
+                        <p><b>Brief:</b> Inicializa el sistema de renderizado y configura OpenGL.</p>
+                        <p><b>Parámetros:</b> Ninguno</p>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>update</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void update(const std::vector&lt;TransformComponent&gt;& transforms, const std::vector&lt;RenderComponent&gt;& renders);</div>
+                        <p><b>Brief:</b> Actualiza y renderiza todas las entidades con componentes de transformación y renderizado.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>transforms</code> - Vector de componentes de transformación.</li>
+                            <li><code>renders</code> - Vector de componentes de renderizado.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>drawShape</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void drawShape(const TransformComponent* transform, const ShapeComponent* shape);</div>
+                        <p><b>Brief:</b> Renderiza una forma primitiva con la transformación especificada.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>transform</code> - Puntero al componente de transformación.</li>
+                            <li><code>shape</code> - Puntero al componente de forma.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>drawModel</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void drawModel(const TransformComponent* transform, const RenderComponent* model, Program &program);</div>
+                        <p><b>Brief:</b> Renderiza un modelo 3D con la transformación y el programa de shader especificados.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>transform</code> - Puntero al componente de transformación.</li>
+                            <li><code>model</code> - Puntero al componente de renderizado con el modelo.</li>
+                            <li><code>program</code> - Referencia al programa de shader a utilizar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+                
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>UpdateTransformMatrix</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">static void UpdateTransformMatrix(TransformComponent &transform);</div>
+                        <p><b>Brief:</b> Actualiza la matriz de transformación de un componente a partir de su posición, rotación y escala.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>transform</code> - Referencia al componente de transformación a actualizar.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- InputSystem -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>InputSystem</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Sistema encargado de procesar la entrada de usuario y actualizar los componentes de cámara e input.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>update</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void update(InputComponent* input, CameraComponent* camera, Input& inputManager, float deltaTime);</div>
+                        <p><b>Brief:</b> Actualiza el estado de input y la posición/orientación de la cámara según la entrada del usuario.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>input</code> - Puntero al componente de input.</li>
+                            <li><code>camera</code> - Puntero al componente de cámara.</li>
+                            <li><code>inputManager</code> - Referencia al gestor de entrada.</li>
+                            <li><code>deltaTime</code> - Tiempo transcurrido desde el último frame en segundos.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AnimationSystem -->
+        <div class="api-class">
+            <div class="class-header collapsible" onclick="toggleCollapsible(this)">
+                <h3>AnimationSystem</h3>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="collapsed-content">
+                <p>Sistema encargado de procesar animaciones y actualizar las transformaciones de las entidades.</p>
+                
+                <h4>Métodos</h4>
+                <div class="method-header collapsible" onclick="toggleCollapsible(this)">
+                    <h5>update</h5>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="collapsed-content">
+                    <div class="method">
+                        <div class="method-signature">void update(TransformComponent* transform, AnimationComponent* anim, float deltaTime);</div>
+                        <p><b>Brief:</b> Actualiza la transformación de una entidad según su componente de animación.</p>
+                        <p><b>Parámetros:</b></p>
+                        <ul>
+                            <li><code>transform</code> - Puntero al componente de transformación a actualizar.</li>
+                            <li><code>anim</code> - Puntero al componente de animación.</li>
+                            <li><code>deltaTime</code> - Tiempo transcurrido desde el último frame en segundos.</li>
+                        </ul>
+                        <p><b>Retorno:</b> Ninguno</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const collapsibles = document.querySelectorAll(".collapsible");
+            collapsibles.forEach(button => {
+                button.addEventListener("click", function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector(".toggle-icon");
+                    
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                        icon.textContent = "+";
+                    } else {
+                        document.querySelectorAll(".content").forEach(c => c.style.display = "none");
+                        document.querySelectorAll(".toggle-icon").forEach(i => i.textContent = "+");
+                        
+                        content.style.display = "block";
+                        icon.textContent = "−";
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+    function toggleCollapsible(element) {
+        element.classList.toggle("active");
+        
+        // Find the next sibling which is the content to show/hide
+        var content = element.nextElementSibling;
+        
+        // Toggle the display state
+        if (content.classList.contains("show")) {
+            content.classList.remove("show");
+            element.querySelector(".toggle-icon").textContent = "+";
+        } else {
+            content.classList.add("show");
+            element.querySelector(".toggle-icon").textContent = "×";
+        }
+    }
+    </script>
+    <footer class="footer">
+        <p>&copy; 2025 Documentación del Motor Gráfico 3PVG. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
