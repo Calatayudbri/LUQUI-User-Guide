@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUQUI Engine - Guía de Uso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <header class="bg-green-600 text-white text-center py-4 text-xl font-bold flex items-center justify-center">
+        <img src="LUQUI.png" alt="LUQUI Engine Logo" class="h-20 mr-4"> 
+        LUQUI Engine - Guía de Uso
+    </header>
+    
+    <nav class="bg-green-500 text-white py-2">
+        <ul class="flex justify-center space-x-6">
+            <li><a href="#inicio" class="hover:underline">Inicio</a></li>
+            <li><a href="#instalacion" class="hover:underline">Instalación</a></li>
+            <li><a href="#deps" class="hover:underline">DEPENDENCIAS</a></li>
+            <li><a href="#ejemplos" class="hover:underline">Ejemplos</a></li>
+        </ul>
+    </nav>
+    
+    <section id="inicio" class="p-6">
+        <h2 class="text-2xl font-bold text-gray-800">Bienvenido a LUQUI Engine</h2>
+        <p class="mt-2 text-gray-700">LUQUI Engine es un motor gráfico basado en openGL desarrollado por Lucas Calatayud y Enrique López</p>
+    </section>
+    
+    <section id="deps" class="p-6 bg-white shadow-md rounded-md m-4">
+        <h2 class="text-2xl font-bold text-gray-800">DEPENDENCIAS</h2>
+        <ol class="list-decimal list-inside mt-2 text-gray-700">
+            <li>Visual Studio 2022.</li>
+            <li>Conan</li>
+            <li>Python 3.12</li>
+            <li>CMake.</li>
+        </ol>
+    </section>
+    
+    <section id="instalacion" class="p-6 bg-white shadow-md rounded-md m-4">
+        <h2 class="text-2xl font-bold text-gray-800">Guía de Instalación</h2>
+        <p class="mt-2 text-gray-700">Para instalar LUQUI Engine, sigue los siguientes pasos:</p>
+        <ol class="list-decimal list-inside mt-2 text-gray-700">
+            <li>Descarga el archivo zip del motor.</li>
+            <li>Abrir consola developer command prompt de Visual Studio.</li>
+            <li>Navegar hasta la ruta del repositorio.</li>
+            <li>En la carpeta raíz utilizar los siguientes comandos: <br><code class="bg-gray-200 p-1 rounded">4.1. ./tools/gendeps.bat</br><br>4.2. ./tools/premake/premake5.exe vs2022</br> <br>4.3. ./build/LUQUI.sln</br></code></li>
+        </ol>
+    </section>
+    
+    
+    <section id="ejemplos" class="p-6 bg-white shadow-md rounded-md m-4">
+        <h2 class="text-2xl font-bold text-gray-800">Ejemplo de Código</h2>
+        <p class="mt-2 text-gray-700">Aquí tienes un pequeño ejemplo para dibujar un sprite en pantalla:</p>
+        <pre class="bg-gray-200 p-4 rounded mt-2"><code>
+
+            Ejemplo aqui
+        </code></pre>
+    </section>
+    
+    <footer class="bg-gray-800 text-white text-center py-4 mt-6">
+       LUQUI Engine.
+    </footer>
+</body>
+</html>
